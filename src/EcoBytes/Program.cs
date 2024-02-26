@@ -1,3 +1,5 @@
-﻿using System;
+﻿using u4.Engine;
 
-Console.WriteLine("Hello, World!");
+LaunchOptions options = LaunchOptions.Default;
+
+App.Run(options, new Game());

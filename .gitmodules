@@ -1,0 +1,3 @@
+[submodule "lib/u4"]
+	path = lib/u4
+	url = https://github.com/AquagooseGames/u4
