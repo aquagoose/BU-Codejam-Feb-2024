@@ -1,1 +1,22 @@
-
+{
+  "PGB": {
+    "Name": "Poole Gateway Building",
+    "Elec": 1634.6,
+    "Gas": 1467.1,
+  },
+  "DH": {
+    "Name": "Dorset House",
+    "Elec": 730.2,
+    "Gas": 937.8
+  },
+  "KH": {
+    "Name": "Kimmeridge House",
+    "Elec": 346.2,
+    "Gas": 58.7
+  },
+  "FB": {
+    "Name": "Fusion Building",
+    "Elec": 1331.0,
+    "Gas": 167.6
+  }
+}
