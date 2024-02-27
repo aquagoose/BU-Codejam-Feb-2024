@@ -1,0 +1,154 @@
+{
+    "EVCharger": {
+        "Name": "EV Charger Install",
+        "Cost": 750,
+        "BuildTime": 1,
+        "ElecImpact": 13000,
+        "GasImpact": 0,
+        "Description": "Buying this upgrade increases the electricity consumption by 13,000 kWh per year."
+    },
+    "LEDBulb": {
+        "Name": "LED light bulb replacement",
+        "Cost": 5000,
+        "BuildTime": 1,
+        "ElecImpact": -4,
+        "GasImpact": 0,
+        "Description": "Buying this upgrade saves 4% of electricity consumption per year."
+    },
+    "LEDFixture": {
+        "Name": "LED light fixture replacement",
+        "Cost": 85000,
+        "BuildTime": 4,
+        "ElecImpact": -7,
+        "GasImpact": 0,
+        "Description": "Buying this upgrade saves 7% of electricity consumption per year. This change turns 64kW lights into 25W LED fixture."
+    },
+    "Lighting": {
+        "Name": "Lighting controls",
+        "Cost": 8000,
+        "BuildTime": 4,
+        "ElecImpact": -2,
+        "GasImpact": 0,
+        "Description": "Buying this upgrade saves 2% of electricity consumption per year. This change makes use of daylight sensors and light timers."
+    },
+    "Monitor": {
+        "Name": "Computer monitor upgrades",
+        "Cost": 200,
+        "BuildTime": 1,
+        "ElecImpact": -0.2,
+        "GasImpact": 0,
+        "Description": "Buying this upgrade saves 0.2% of electricity consumption per year. This change replaces existing monitors for higher efficiency ones, programmed to enter sleep mode after being idle for 15 minutes."
+    },
+    "Pump": {
+        "Name": "Pump upgrades",
+        "Cost": 40000,
+        "BuildTime": 16,
+        "ElecImpact": -5,
+        "GasImpact": 0,
+        "Description": "Buying this upgrade saves 5% of electricity consumption per year. This change makes heating systems and hot water pumps more efficient."
+    },
+    "ITServer": {
+        "Name": "IT server upgrades",
+        "Cost": 15000,
+        "BuildTime": 4,
+        "ElecImpact": -6,
+        "GasImpact": 0,
+        "Description": "Buying this upgrade saves 6% of electricity consumption per year. This change replaces existing server equipment for higher efficiency ones."
+    },
+    "Boiler": {
+        "Name": "Boiler upgrades",
+        "Cost": 15000,
+        "BuildTime": 8,
+        "ElecImpact": -5,
+        "GasImpact": 0,
+        "Description": "Buying this upgrade saves 5% of electricity consumption per year. This change replaces existing boilers for higher efficiency models."
+    },
+    "InsulationWalls": {
+        "Name": "Wall insulation upgrades",
+        "Cost": 40000,
+        "BuildTime": 36,
+        "ElecImpact": -6,
+        "GasImpact": 0,
+        "Description": "Buying this upgrade saves 6% of electricity consumption per year. This change adds extra insulation into the walls so heating isn't needed as much"
+    },
+    "InsulationRoof": {
+        "Name": "Roof insulation upgrades",
+        "Cost": 75000,
+        "BuildTime": 52,
+        "ElecImpact": -8,
+        "GasImpact": 0,
+        "Description": "Buying this upgrade saves 8% of electricity consumption per year. This change adds extra insulation into the roof so heating isn't needed as much"
+    },
+    "InsulationPipesNDucts": {
+        "Name": "Pipework and Ductwork insulation upgrades",
+        "Cost": 2000,
+        "BuildTime": 52,
+        "ElecImpact": -1,
+        "GasImpact": 0,
+        "Description": "Buying this upgrade saves 1% of gas consumption per year. This change adds insulation to all pipes and ducts to keep the warm air in."
+    },
+    "HeatPump": {
+        "Name": "Air source heat pump retrofit",
+        "Cost": 175000,
+        "BuildTime": 36,
+        "ElecImpact": 15,
+        "GasImpact": 0,
+        "Description": "Buying this upgrade increases the electricity consumption by 15%. This change completely removed gas usage in Dorset House. All gas-saving projects will now be converted into electricity saving projects. Boiler upgrades are no longer available."
+    },
+    "HeatVentCoolControls": {
+        "Name": "Heating, ventilation and cooling controls upgrades",
+        "Cost": 35000,
+        "BuildTime": 12,
+        "ElecImpact": -2,
+        "GasImpact": -5,
+        "Description": "Buying this upgrade saves 5% of gas and 2% electricity consumption per year. This change allows for energy-using equipment to be smarter by only turning on heating and ventilation when someone walks in."
+    },
+    "Glazing": {
+        "Name": "Glazing upgrades",
+        "Cost": 250000,
+        "BuildTime": 52,
+        "ElecImpact": 0,
+        "GasImpact": -7,
+        "Description": "Buying this upgrade saves 7% of gas usage per year. This change upgrades all windows and doors with triple glazing."
+    },
+    "Campaign": {
+        "Name": "University-wide engagement campaign",
+        "Cost": 500,
+        "BuildTime": 12,
+        "ElecImpact": -2,
+        "GasImpact": -1,
+        "Description": "Buying this upgrade saves 2% electricity and 1% gas consumption for the duration of the campaign."
+    },
+    "NoHeating": {
+        "Name": "Turn down the heating",
+        "Cost": 0,
+        "BuildTime": 0,
+        "ElecImpact": 0,
+        "GasImpact": -6,
+        "Description": "Selecting this task saves 6% of gas consumption for the next three months."
+    },
+    "PGBHours": {
+        "Name": "Change operational hours in Poole Gateway Building",
+        "Cost": 0,
+        "BuildTime": 0,
+        "ElecImpact": 0,
+        "GasImpact": -10,
+        "Description": "Selecting this task saves 10% of gas consumption for the next three months. This change replaces the 24/7 access to the Poole Gateway Building into being only open at 08:00 - 18:00. This will lead to student dissatifaction."
+    },
+    "ExtLighting": {
+        "Name": "Turn off external lighting at night",
+        "Cost": 0,
+        "BuildTime": 0,
+        "ElecImpact": -2,
+        "GasImpact": 0,
+        "Description": "Selecting this task saves 2% of electricity consumption for the next three months. This change will lead to student dissatifaction and an increase in vandalism."
+    },
+    "Solar": {
+        "Name": "Install solar panels",
+        "Cost": 10000,
+        "BuildTime": 3,
+        "ElecImpact": -15,
+        "GasImpact": 0,
+        "Description": "Buying this upgrade saves 15% of electricity consumption per year. This will turn solar energy into electricity, reducing required energy to maintain the building."
+    }
+}

@@ -10,5 +10,15 @@
     <ItemGroup>
       <ProjectReference Include="..\..\lib\u4\src\u4.Engine\u4.Engine.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <Content Include="Content/**/*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    </ItemGroup>
 
 </Project>
