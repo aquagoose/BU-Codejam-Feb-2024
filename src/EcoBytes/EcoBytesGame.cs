@@ -11,6 +11,8 @@ namespace EcoBytes;
 public class EcoBytesGame : Game
 {
     public static Font Font;
+
+    public static Texture DorsetHouse;
     
     public override void Initialize()
     {
@@ -25,6 +27,9 @@ public class EcoBytesGame : Game
         
         Logger.Debug("Loading font.");
         Font = new Font(Graphics.Device, "Content/Roboto-Regular.ttf");
+        
+        Logger.Debug("Loading textures.");
+        DorsetHouse = new Texture("Content/Textures/dh.png");
         
         base.Initialize();
     }

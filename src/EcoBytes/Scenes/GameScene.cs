@@ -21,7 +21,7 @@ public class GameScene : Scene
     public override void Initialize()
     {
         Entity test = new Entity("test");
-        test.AddComponent(new Sprite(new Texture("Content/Textures/dh.png")));
+        test.AddComponent(new Sprite(EcoBytesGame.DorsetHouse));
         test.AddComponent(new BuildingComponent("DH"));
         AddEntity(test);
         
