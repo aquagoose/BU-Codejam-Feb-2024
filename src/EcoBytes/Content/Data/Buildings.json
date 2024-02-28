@@ -2,7 +2,7 @@
   "PGB": {
     "Name": "Poole Gateway Building",
     "Elec": 1634.6,
-    "Gas": 1467.1
+    "Gas": 1467.0
   },
   "DH": {
     "Name": "Dorset House",
@@ -12,11 +12,11 @@
   "KH": {
     "Name": "Kimmeridge House",
     "Elec": 346.2,
-    "Gas": 58.7
+    "Gas": 586.9
   },
   "FB": {
     "Name": "Fusion Building",
     "Elec": 1331.0,
-    "Gas": 167.6
+    "Gas": 238.9
   }
 }
