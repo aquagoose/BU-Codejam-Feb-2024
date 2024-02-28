@@ -26,6 +26,8 @@ public class EcoBytesGame : Game
     public static Texture CloseButtonTexture;
     
     public static Texture DorsetHouse;
+    public static Texture KimmeridgeHouse;
+    public static Texture PooleGatewayBuilding;
     
     public override void Initialize()
     {
@@ -47,6 +49,8 @@ public class EcoBytesGame : Game
         RightArrowTexture = new Texture("Content/Textures/RightArrow.png");
         CloseButtonTexture = new Texture("Content/Textures/CloseButton.png");
         DorsetHouse = new Texture("Content/Textures/dh.png");
+        KimmeridgeHouse = new Texture("Content/Textures/kh.png");
+        PooleGatewayBuilding = new Texture("Content/Textures/pgb.png");
         
         base.Initialize();
     }

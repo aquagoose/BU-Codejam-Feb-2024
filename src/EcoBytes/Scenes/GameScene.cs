@@ -39,9 +39,14 @@ public class GameScene : Scene
         Entity dorsetHouse = new Entity("DorsetHouse", new Transform(new Vector3(100, 100, 0)));
         dorsetHouse.AddComponent(new Sprite(EcoBytesGame.DorsetHouse));
         dorsetHouse.AddComponent(new BuildingComponent("DH"));
+        dorsetHouse.AddComponent(new ClickableBuilding());
         AddEntity(dorsetHouse);
 
-        _currentBuilding = dorsetHouse.GetComponent<BuildingComponent>();
+        Entity kimmeridgeHouse = new Entity("KimmeridgeHouse", new Transform(new Vector3(1000, 100, 0)));
+        kimmeridgeHouse.AddComponent(new Sprite(EcoBytesGame.KimmeridgeHouse));
+        kimmeridgeHouse.AddComponent(new BuildingComponent("KH"));
+        kimmeridgeHouse.AddComponent(new ClickableBuilding());
+        AddEntity(kimmeridgeHouse);
 
         const int padding = 10;
 
@@ -49,12 +54,12 @@ public class GameScene : Scene
 
         ImageButton leftArrow = new ImageButton("LeftArrow",
             new Point(1280 - (buttonSize.Width) * 2 - padding * 2, 720 - buttonSize.Height - padding), buttonSize,
-            EcoBytesGame.LeftArrowTexture, () => camera.MoveCamera(-10));
+            EcoBytesGame.LeftArrowTexture, () => camera.MoveCamera(-100));
         UI.AddElement(leftArrow);
 
         ImageButton rightArrow = new ImageButton("RightArrow",
             new Point(1280 - buttonSize.Width - padding, 720 - buttonSize.Height - padding), buttonSize,
-            EcoBytesGame.RightArrowTexture, () => camera.MoveCamera(10));
+            EcoBytesGame.RightArrowTexture, () => camera.MoveCamera(100));
         UI.AddElement(rightArrow);
 
         TextElement weekText =
@@ -82,8 +87,6 @@ public class GameScene : Scene
 
             buttonPosition.Y += 30;
         }
-        
-        OpenUpgradePanel(_currentBuilding);
         
         base.Initialize();
 
