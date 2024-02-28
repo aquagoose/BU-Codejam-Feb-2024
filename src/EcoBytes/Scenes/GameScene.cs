@@ -1,6 +1,5 @@
 ﻿using System.Numerics;
 using EcoBytes.Components;
-using EcoBytes.UI;
 using Pie.Windowing;
 using u4.Engine;
 using u4.Engine.Entities;
@@ -37,11 +36,11 @@ public class GameScene : Scene
         // Navigation Buttons
         Entity navRight = new Entity("Right Button", new Transform(new Vector3(1193f, 360f, 0f)));
         navRight.AddComponent(new Sprite(new Texture("Content/Textures/RightArrow.png"), true) { Scale = new Vector2(0.5f) });
-        navRight.AddComponent(new Button(() => camera.MoveCamera(500)));
+        //navRight.AddComponent(new Button(() => camera.MoveCamera(500)));
 
         Entity navLeft = new Entity("Left Button", new Transform(new Vector3(0f, 360, 0f)));
         navLeft.AddComponent(new Sprite(new Texture("Content/Textures/LeftArrow.png"), true) { Scale = new Vector2(0.5f) });
-        navLeft.AddComponent(new Button(() => camera.MoveCamera(-500)));
+        //navLeft.AddComponent(new Button(() => camera.MoveCamera(-500)));
         
         AddEntity(navRight);
         AddEntity(navLeft);
@@ -62,18 +61,12 @@ public class GameScene : Scene
             _weekAdvanceCounter -= WeekAdvanceTime;
             CurrentWeek++;
         }
-        
-        if (Input.KeyPressed(Key.P))
-            GetEntity("test").GetComponent<BuildingComponent>().PurchaseUpgrade("LEDFixture");
-        
-        if (Input.KeyPressed(Key.O))
-            GetEntity("test").GetComponent<BuildingComponent>().PurchaseUpgrade("Pump");
     }
 
     public override void Draw()
     {
         base.Draw();
 
-        EcoBytesGame.Font.Draw(20, $"Week {CurrentWeek}", new Vector2(10, 680), Color.White, true);
+        EcoBytesGame.Font.Draw(20, $"Week {CurrentWeek}", new Vector2(10, 690), Color.White, true);
     }
 }

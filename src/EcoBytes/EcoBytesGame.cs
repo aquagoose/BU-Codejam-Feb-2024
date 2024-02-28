@@ -23,6 +23,8 @@ public class EcoBytesGame : Game
     
     public static Font Font;
 
+    public static Texture WhiteTexture;
+    
     public static Texture DorsetHouse;
 
     public EcoBytesGame(GameScene scene)
@@ -48,6 +50,7 @@ public class EcoBytesGame : Game
         Font = new Font(Graphics.Device, "Content/Roboto-Regular.ttf");
         
         Logger.Debug("Loading textures.");
+        WhiteTexture = new Texture(new byte[]{ 255, 255, 255, 255 }, new Size<int>(1, 1));
         DorsetHouse = new Texture("Content/Textures/dh.png");
         
         base.Initialize();

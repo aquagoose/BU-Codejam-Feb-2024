@@ -2,10 +2,12 @@
 
 namespace EcoBytes.Scenes;
 
-public class BuildingScene : Scene
+public class TestScene : Scene
 {
     public override void Initialize()
     {
         base.Initialize();
+        
+        
     }
 }
