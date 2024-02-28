@@ -23,16 +23,29 @@ public class BuildingComponent : Component
 
     public void PurchaseUpgrade(string upgradeId)
     {
-        foreach ((_, PurchasedUpgrade upgrade) in PurchasedUpgrades)
-        {
-            if (upgrade.Progress == UpgradeProgress.Building)
-                throw new MultipleUpgradeException();
-        }
+        if (IsUpgrading(out _))
+            throw new MultipleUpgradeException();
 
         if (PurchasedUpgrades.ContainsKey(upgradeId))
             throw new UpgradePurchasedException(Upgrade.LoadedUpgrades[upgradeId].Name);
         
         PurchasedUpgrades.Add(upgradeId, new PurchasedUpgrade(GameScene.CurrentWeek));
+    }
+    
+    public bool IsUpgrading(out string upgradeId)
+    {
+        upgradeId = null;
+        
+        foreach ((string id, PurchasedUpgrade upgrade) in PurchasedUpgrades)
+        {
+            if (upgrade.Progress == UpgradeProgress.Building)
+            {
+                upgradeId = id;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public override void Update(float dt)

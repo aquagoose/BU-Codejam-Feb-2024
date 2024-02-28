@@ -24,6 +24,8 @@ public class Button : UIElement
     public Color ClickColor;
 
     public Color TextColor;
+
+    public float Progress;
     
     public Button(string name, Point position, Size<int> size, Font font, uint textSize, string text, Action click) :
         base(name, position, size)
@@ -37,6 +39,8 @@ public class Button : UIElement
         HoverColor = Color.Green;
         ClickColor = Color.Orange;
         TextColor = Color.White;
+
+        Progress = 0;
     }
 
     public override void Update(ref bool mouseCaptured)
@@ -64,5 +68,7 @@ public class Button : UIElement
         Font.Draw(renderer, TextSize, Text, position + new Vector2(Size.Width / 2, Size.Height / 2) - new Vector2(textSize.Width / 2, textSize.Height / 2), TextColor);
         
         base.Draw(renderer);
+        
+        renderer.DrawRectangle(position, new Size<int>((int) (Size.Width * Progress), Size.Height), new Color(1.0f, 1.0f, 1.0f, 0.5f));
     }
 }
