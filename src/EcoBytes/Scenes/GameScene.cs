@@ -1,5 +1,6 @@
 ﻿using System.Numerics;
 using EcoBytes.Components;
+using EcoBytes.Data;
 using Pie.Windowing;
 using u4.Engine;
 using u4.Engine.Entities;
@@ -29,7 +30,7 @@ public class GameScene : Scene
         
         base.Initialize();
 
-        CurrentWeek = 0;
+        CurrentWeek = 1;
     }
 
     public override void Update(float dt)
@@ -51,6 +52,7 @@ public class GameScene : Scene
     {
         base.Draw();
 
-        EcoBytesGame.Font.Draw(Graphics.SpriteRenderer, 20, $"Week {CurrentWeek}", new Vector2(10, 680), Color.White);
+        EcoBytesGame.Font.Draw(Graphics.SpriteRenderer, 20, $"Week {CurrentWeek}", new Vector2(10, 680), Color.White,
+            true);
     }
 }
