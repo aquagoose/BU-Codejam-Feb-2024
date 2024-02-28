@@ -22,7 +22,9 @@ public class GameScene : Scene
     public const float WeekAdvanceTime = 1f;
     
     private float _weekAdvanceCounter;
-    public static uint CurrentWeek;
+    public uint CurrentWeek;
+
+    public uint Budget;
 
     private Panel _upgradePanel;
     private bool _hasRefreshedPanel;
@@ -36,19 +38,30 @@ public class GameScene : Scene
         mainCamera.AddComponent(camera);
         AddEntity(mainCamera);
 
+        const float xOffset = -1000;
+        const float scaleX = 3200;
+
+        Entity grass = new Entity("Grass", new Transform(new Vector3(xOffset, 500, 0)));
+        grass.AddComponent(new Sprite(EcoBytesGame.WhiteTexture) { Scale = new Vector2(scaleX, 300), Tint = Color.Green });
+        AddEntity(grass);
+        
+        Entity road = new Entity("Road", new Transform(new Vector3(xOffset, 350, 0)));
+        road.AddComponent(new Sprite(EcoBytesGame.WhiteTexture) { Scale = new Vector2(scaleX, 200), Tint = new Color(0.85f, 0.85f, 0.85f) } );
+        AddEntity(road);
+
         Entity dorsetHouse = new Entity("DorsetHouse", new Transform(new Vector3(100, 100, 0)));
         dorsetHouse.AddComponent(new Sprite(EcoBytesGame.DorsetHouse));
         dorsetHouse.AddComponent(new BuildingComponent("DH"));
         dorsetHouse.AddComponent(new ClickableBuilding());
         AddEntity(dorsetHouse);
 
-        Entity kimmeridgeHouse = new Entity("KimmeridgeHouse", new Transform(new Vector3(1000, 100, 0)));
+        Entity kimmeridgeHouse = new Entity("KimmeridgeHouse", new Transform(new Vector3(1000, 60, 0)));
         kimmeridgeHouse.AddComponent(new Sprite(EcoBytesGame.KimmeridgeHouse));
         kimmeridgeHouse.AddComponent(new BuildingComponent("KH"));
         kimmeridgeHouse.AddComponent(new ClickableBuilding());
         AddEntity(kimmeridgeHouse);
 
-        Entity pooleGateway = new Entity("PooleGateway", new Transform(new Vector3(-800, 100, 0)));
+        Entity pooleGateway = new Entity("PooleGateway", new Transform(new Vector3(-800, 30, 0)));
         pooleGateway.AddComponent(new Sprite(EcoBytesGame.PooleGatewayBuilding));
         pooleGateway.AddComponent(new BuildingComponent("PGB"));
         pooleGateway.AddComponent(new ClickableBuilding());
@@ -58,7 +71,7 @@ public class GameScene : Scene
 
         Size<int> buttonSize = new Size<int>(30, 40);
 
-        const int camMoveDist = 200;
+        const int camMoveDist = 300;
         
         ImageButton leftArrow = new ImageButton("LeftArrow",
             new Point(1280 - (buttonSize.Width) * 2 - padding * 2, 720 - buttonSize.Height - padding), buttonSize,
@@ -97,6 +110,7 @@ public class GameScene : Scene
         base.Initialize();
 
         CurrentWeek = 1;
+        Budget = 500000;
     }
 
     public void OpenUpgradePanel(BuildingComponent building)
@@ -136,9 +150,6 @@ public class GameScene : Scene
             _weekAdvanceCounter -= WeekAdvanceTime;
             CurrentWeek++;
         }
-        
-        if (Input.KeyPressed(Key.P))
-            OpenUpgradePanel(_currentBuilding);
 
         if (_currentBuilding != null)
         {
@@ -164,5 +175,8 @@ public class GameScene : Scene
         }
         
         UI.GetElement<TextElement>("WeekText").Text = $"Week {CurrentWeek}";
+        
+        if (Input.KeyPressed(Key.P))
+            EcoBytesGame.SetScene(new GameScene());
     }
 }

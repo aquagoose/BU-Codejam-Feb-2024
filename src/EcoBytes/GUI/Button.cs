@@ -35,9 +35,9 @@ public class Button : UIElement
         Text = text;
         Click = click;
         
-        Color = Color.Red;
-        HoverColor = Color.Green;
-        ClickColor = Color.Orange;
+        Color = Color.LightSeaGreen;
+        HoverColor = Color.MediumSeaGreen;
+        ClickColor = Color.MediumSpringGreen;
         TextColor = Color.White;
 
         Progress = 0;

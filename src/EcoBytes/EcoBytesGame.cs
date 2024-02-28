@@ -63,7 +63,7 @@ public class EcoBytesGame : Game
 
     public override void Draw()
     {
-        Graphics.Device.ClearColorBuffer(Color.Black);
+        Graphics.Device.ClearColorBuffer(Color.CornflowerBlue);
         SpriteRenderer renderer = Graphics.SpriteRenderer;
         
         // Declare Camera Transform Matrix
@@ -80,5 +80,11 @@ public class EcoBytesGame : Game
         renderer.End();
         
         UI.Draw();
+    }
+
+    public static void SetScene(Scene scene)
+    {
+        UI.ClearElements();
+        SceneManager.SetScene(scene);
     }
 }

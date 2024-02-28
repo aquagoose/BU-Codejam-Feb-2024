@@ -4,6 +4,7 @@ using EcoBytes.Data;
 using EcoBytes.Exceptions;
 using EcoBytes.Scenes;
 using u4.Engine.Entities;
+using u4.Engine.Scenes;
 
 namespace EcoBytes.Components;
 
@@ -29,7 +30,7 @@ public class BuildingComponent : Component
         if (PurchasedUpgrades.ContainsKey(upgradeId))
             throw new UpgradePurchasedException(Upgrade.LoadedUpgrades[upgradeId].Name);
         
-        PurchasedUpgrades.Add(upgradeId, new PurchasedUpgrade(GameScene.CurrentWeek));
+        PurchasedUpgrades.Add(upgradeId, new PurchasedUpgrade(((GameScene) SceneManager.CurrentScene).CurrentWeek));
     }
     
     public bool IsUpgrading(out string upgradeId)
@@ -52,7 +53,7 @@ public class BuildingComponent : Component
     {
         base.Update(dt);
 
-        uint currentWeek = GameScene.CurrentWeek;
+        uint currentWeek = ((GameScene) SceneManager.CurrentScene).CurrentWeek;
         
         foreach ((string uId, PurchasedUpgrade upgrade) in PurchasedUpgrades)
         {
@@ -63,8 +64,6 @@ public class BuildingComponent : Component
 
             if (currentWeek - upgrade.StartingWeek >= upgradeInfo.BuildTime)
                 upgrade.Progress = UpgradeProgress.Completed;
-            
-            Console.WriteLine($"{uId} - {upgrade.Progress}");
         }
     }
 
