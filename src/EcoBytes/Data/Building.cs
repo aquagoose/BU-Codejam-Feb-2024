@@ -20,6 +20,13 @@ public readonly struct Building
     /// </summary>
     public readonly double Gas;
 
+    public Building(string name, double elec, double gas)
+    {
+        Name = name;
+        Elec = elec;
+        Gas = gas;
+    }
+
     public static Dictionary<string, Building> LoadedBuildings;
 
     public static void LoadBuildingsFromJson(string json)

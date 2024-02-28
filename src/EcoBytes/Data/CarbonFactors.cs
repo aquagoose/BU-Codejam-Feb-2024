@@ -24,6 +24,14 @@ public readonly struct CarbonFactors
     /// </summary>
     public readonly double GasFactor;
 
+    public CarbonFactors(double elecCost, double gasCost, double elecFactor, double gasFactor)
+    {
+        ElecCost = elecCost;
+        GasCost = gasCost;
+        ElecFactor = elecFactor;
+        GasFactor = gasFactor;
+    }
+
     public static CarbonFactors LoadedFactors;
 
     public static void LoadFactorsFromJson(string json)

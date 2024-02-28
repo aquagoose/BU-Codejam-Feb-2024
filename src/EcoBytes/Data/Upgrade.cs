@@ -36,6 +36,16 @@ public readonly struct Upgrade
     /// </summary>
     public readonly string Description;
 
+    public Upgrade(string name, int cost, int buildTime, double elecImpact, double gasImpact, string description)
+    {
+        Name = name;
+        Cost = cost;
+        BuildTime = buildTime;
+        ElecImpact = elecImpact;
+        GasImpact = gasImpact;
+        Description = description;
+    }
+
     public static Dictionary<string, Upgrade> LoadedUpgrades;
 
     public static void LoadUpgradesFromJson(string json)

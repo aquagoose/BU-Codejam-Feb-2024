@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using EcoBytes.Data;
+using EcoBytes.Exceptions;
 using EcoBytes.Scenes;
 using u4.Engine.Entities;
 
@@ -7,14 +9,24 @@ namespace EcoBytes.Components;
 
 public class BuildingComponent : Component
 {
-    public readonly string Name;
+    public readonly string Id;
     
     public readonly Dictionary<string, PurchasedUpgrade> PurchasedUpgrades;
 
-    public BuildingComponent(string name)
+    public string Name => Building.LoadedBuildings[Id].Name;
+
+    public BuildingComponent(string id)
     {
-        Name = name;
+        Id = id;
         PurchasedUpgrades = new Dictionary<string, PurchasedUpgrade>();
+    }
+
+    public void PurchaseUpgrade(string upgradeId)
+    {
+        if (PurchasedUpgrades.ContainsKey(upgradeId))
+            throw new UpgradePurchasedException(Upgrade.LoadedUpgrades[upgradeId].Name);
+        
+        PurchasedUpgrades.Add(upgradeId, new PurchasedUpgrade(GameScene.CurrentWeek));
     }
 
     public override void Update(float dt)
@@ -46,6 +58,12 @@ public class BuildingComponent : Component
         /// The current progress of the building.
         /// </summary>
         public UpgradeProgress Progress;
+
+        public PurchasedUpgrade(uint currentWeek)
+        {
+            StartingWeek = currentWeek;
+            Progress = UpgradeProgress.Building;
+        }
     }
 
     public enum UpgradeProgress

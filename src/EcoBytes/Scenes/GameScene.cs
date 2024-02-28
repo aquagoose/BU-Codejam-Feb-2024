@@ -1,5 +1,7 @@
 ﻿using System.Numerics;
 using EcoBytes.Components;
+using Pie.Windowing;
+using u4.Engine;
 using u4.Engine.Entities;
 using u4.Engine.Scenes;
 using u4.Math;
@@ -40,6 +42,9 @@ public class GameScene : Scene
             _weekAdvanceCounter -= WeekAdvanceTime;
             CurrentWeek++;
         }
+        
+        if (Input.KeyPressed(Key.P))
+            GetEntity("test").GetComponent<BuildingComponent>().PurchaseUpgrade("LEDFixture");
     }
 
     public override void Draw()
