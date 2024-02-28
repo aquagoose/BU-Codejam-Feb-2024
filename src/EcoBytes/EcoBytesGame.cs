@@ -3,6 +3,7 @@ using System.IO;
 using System.Numerics;
 using EcoBytes.Components;
 using EcoBytes.Data;
+using EcoBytes.GUI;
 using EcoBytes.Scenes;
 using u4.Core;
 using u4.Engine;
@@ -16,9 +17,6 @@ namespace EcoBytes;
 
 public class EcoBytesGame : Game
 {
-    public static List<SpriteDrawInfo> Sprites;
-    public static List<SpriteDrawInfo> Ui;
-    
     public static GameScene GameScene;
     
     public static Font Font;
@@ -30,9 +28,6 @@ public class EcoBytesGame : Game
     public EcoBytesGame(GameScene scene)
     {
         GameScene = scene;
-
-        Sprites = new List<SpriteDrawInfo>();
-        Ui = new List<SpriteDrawInfo>();
     }
     
     public override void Initialize()
@@ -56,16 +51,15 @@ public class EcoBytesGame : Game
         base.Initialize();
     }
 
+    public override void Update(float dt)
+    {
+        UI.Update();
+        base.Update(dt);
+    }
+
     public override void Draw()
     {
         Graphics.Device.ClearColorBuffer(Color.Black);
-        Sprites.Clear();
-        Ui.Clear();
-        
-        // u4's main renderer currently isn't working well enough for it to draw sprites yet.
-        // Fortunately, for this project, we only need the sprite renderer, so we can just use it directly for the moment. 
-        base.Draw();
-
         SpriteRenderer renderer = Graphics.SpriteRenderer;
         
         // Declare Camera Transform Matrix
@@ -73,34 +67,14 @@ public class EcoBytesGame : Game
         
         // Check for a camera in current context
         if (SceneManager.CurrentScene.TryGetEntity("Camera", out Entity camera))
-        {
             camTransform = camera.GetComponent<Camera>().CamTranslation;
-        }
         
+        // u4's main renderer currently isn't working well enough for it to draw sprites yet.
+        // Fortunately, for this project, we only need the sprite renderer, so we can just use it directly for the moment.
         renderer.Begin(camTransform);
-        foreach (SpriteDrawInfo info in Sprites)
-            renderer.Draw(info.Texture, info.Position, info.Tint, 0, info.Scale, Vector2.Zero);
+        base.Draw();
         renderer.End();
         
-        renderer.Begin();
-        foreach (SpriteDrawInfo info in Ui)
-            renderer.Draw(info.Texture, info.Position, info.Tint, 0, info.Scale, Vector2.Zero);
-        renderer.End();
-    }
-
-    public struct SpriteDrawInfo
-    {
-        public Texture Texture;
-        public Vector2 Position;
-        public Vector2 Scale;
-        public Color Tint;
-
-        public SpriteDrawInfo(Texture texture, Vector2 position, Vector2 scale, Color tint)
-        {
-            Texture = texture;
-            Position = position;
-            Scale = scale;
-            Tint = tint;
-        }
+        UI.Draw();
     }
 }

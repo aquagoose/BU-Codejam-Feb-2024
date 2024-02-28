@@ -8,4 +8,4 @@ Logger.AttachConsole();
 LaunchOptions options = LaunchOptions.Default;
 
 GameScene scene = new GameScene();
-App.Run(options, new EcoBytesGame(scene), scene);
+App.Run(options, new EcoBytesGame(scene), new TestScene());

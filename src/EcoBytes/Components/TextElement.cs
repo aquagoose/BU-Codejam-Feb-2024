@@ -17,21 +17,18 @@ public class TextElement : Component
 
     public Vector2 TextOffset;
 
-    public bool IsStatic;
-
-    public TextElement(Font font, string text, uint fontSize, Color color, Vector2 textOffset, bool isStatic = false)
+    public TextElement(Font font, string text, uint fontSize, Color color, Vector2 textOffset)
     {
         Font = font;
         Text = text;
         FontSize = fontSize;
         Color = color;
         TextOffset = textOffset;
-        IsStatic = isStatic;
     }
 
     public override void Draw()
     {
         Vector3 position = Transform.Position;
-        Font.Draw(FontSize, Text, new Vector2(position.X, position.Y) + TextOffset, Color, IsStatic);
+        Font.Draw(Graphics.SpriteRenderer, FontSize, Text, new Vector2(position.X, position.Y) + TextOffset, Color);
     }
 }

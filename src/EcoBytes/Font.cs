@@ -32,7 +32,7 @@ public class Font : IDisposable
         _cachedCharacters = new Dictionary<uint, Dictionary<char, Character>>();
     }
 
-    public void Draw(uint size, string text, Vector2 position, Color color, bool isStatic = false)
+    public void Draw(SpriteRenderer renderer, uint size, string text, Vector2 position, Color color)
     {
         Vector2 currentPosition = position;
         
@@ -56,16 +56,8 @@ public class Font : IDisposable
                     continue;
             }
 
-            //renderer.Draw(character.Texture, currentPosition + new Vector2(character.Bearing.X, -character.Bearing.Y),
-            //    color, 0, Vector2.One, Vector2.Zero);
-
-            EcoBytesGame.SpriteDrawInfo info = new EcoBytesGame.SpriteDrawInfo(character.Texture,
-                currentPosition + new Vector2(character.Bearing.X, -character.Bearing.Y), Vector2.One, color);
-            
-            if (isStatic)
-                EcoBytesGame.Ui.Add(info);
-            else
-                EcoBytesGame.Sprites.Add(info);
+            renderer.Draw(character.Texture, currentPosition + new Vector2(character.Bearing.X, -character.Bearing.Y),
+                color, 0, Vector2.One, Vector2.Zero);
             
             currentPosition.X += character.Advance;
         }

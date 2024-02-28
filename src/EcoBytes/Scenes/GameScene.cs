@@ -22,31 +22,20 @@ public class GameScene : Scene
     
     public override void Initialize()
     {
+        // Create Main Camera
+        Entity mainCamera = new Entity("Camera");
+        mainCamera.AddComponent(new Camera());
+        AddEntity(mainCamera);
+        
         Entity test = new Entity("test", new Transform(new Vector3(100f, 100f, 0)));
         test.AddComponent(new Sprite(EcoBytesGame.DorsetHouse));
         test.AddComponent(new BuildingComponent("DH"));
         test.AddComponent(new TextElement(EcoBytesGame.Font, "Dorset House", 100, Color.White, new Vector2(-100, -100)));
         AddEntity(test);
-
-        // Create Main Camera
-        Entity mainCamera = new Entity("Camera");
-        Camera camera = new Camera();
-        mainCamera.AddComponent(camera);
-
-        // Navigation Buttons
-        Entity navRight = new Entity("Right Button", new Transform(new Vector3(1193f, 360f, 0f)));
-        navRight.AddComponent(new Sprite(new Texture("Content/Textures/RightArrow.png"), true) { Scale = new Vector2(0.5f) });
-        //navRight.AddComponent(new Button(() => camera.MoveCamera(500)));
-
-        Entity navLeft = new Entity("Left Button", new Transform(new Vector3(0f, 360, 0f)));
-        navLeft.AddComponent(new Sprite(new Texture("Content/Textures/LeftArrow.png"), true) { Scale = new Vector2(0.5f) });
-        //navLeft.AddComponent(new Button(() => camera.MoveCamera(-500)));
-        
-        AddEntity(navRight);
-        AddEntity(navLeft);
-        AddEntity(mainCamera);
         
         base.Initialize();
+        
+        
 
         CurrentWeek = 1;
     }
@@ -61,12 +50,5 @@ public class GameScene : Scene
             _weekAdvanceCounter -= WeekAdvanceTime;
             CurrentWeek++;
         }
-    }
-
-    public override void Draw()
-    {
-        base.Draw();
-
-        EcoBytesGame.Font.Draw(20, $"Week {CurrentWeek}", new Vector2(10, 690), Color.White, true);
     }
 }
