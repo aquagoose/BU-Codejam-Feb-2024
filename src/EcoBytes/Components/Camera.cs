@@ -7,7 +7,7 @@ namespace EcoBytes.Components;
 public class Camera : Component
 {
 
-    public Matrix4x4 camTranslation => Matrix4x4.CreateTranslation(Transform.Position);
+    public Matrix4x4 CamTranslation => Matrix4x4.CreateTranslation(Transform.Position);
 
     public void MoveCamera(int distance)
     {

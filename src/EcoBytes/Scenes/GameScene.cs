@@ -39,8 +39,8 @@ public class GameScene : Scene
         navRight.AddComponent(new Sprite(new Texture("Content/Textures/RightArrow.png"), true) { Scale = new Vector2(0.5f) });
         navRight.AddComponent(new Button(() => camera.MoveCamera(500)));
 
-        Entity navLeft = new Entity("Left Button", new Transform(new Vector3(87f, 360, 0f)));
-        navLeft.AddComponent(new Sprite(new Texture("Content/Textures/RightArrow.png"), true) { Scale = new Vector2(-0.5f, 0.5f) });
+        Entity navLeft = new Entity("Left Button", new Transform(new Vector3(0f, 360, 0f)));
+        navLeft.AddComponent(new Sprite(new Texture("Content/Textures/LeftArrow.png"), true) { Scale = new Vector2(0.5f) });
         navLeft.AddComponent(new Button(() => camera.MoveCamera(-500)));
         
         AddEntity(navRight);

@@ -4,7 +4,6 @@ using u4.Engine;
 using u4.Math;
 using System.Numerics;
 using System.Drawing;
-using u4.Engine.Entities;
 using u4.Render;
 using Color = u4.Math.Color;
 using EcoBytes.Components;
@@ -29,6 +28,9 @@ public class Button : Component
     {
         Vector3 position = Transform.Position;
         Size<int> size = Entity.GetComponent<Sprite>().Texture.Size;
+        Vector2 scale = Entity.GetComponent<Sprite>().Scale;
+
+        size = new Size<float>(size.Width * scale.X, size.Height * scale.Y).As<int>();
 
         rect = new Rectangle((int) position.X, (int) position.Y, size.Width, size.Height);
     }

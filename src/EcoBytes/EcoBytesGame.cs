@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
+using EcoBytes.Components;
 using EcoBytes.Data;
 using EcoBytes.Scenes;
 using u4.Core;
 using u4.Engine;
+using u4.Engine.Entities;
+using u4.Engine.Scenes;
 using u4.Math;
 using u4.Render;
 using u4.Render.Renderers;
@@ -62,7 +65,16 @@ public class EcoBytesGame : Game
 
         SpriteRenderer renderer = Graphics.SpriteRenderer;
         
-        renderer.Begin();
+        // Declare Camera Transform Matrix
+        Matrix4x4 camTransform = Matrix4x4.Identity;
+        
+        // Check for a camera in current context
+        if (SceneManager.CurrentScene.TryGetEntity("Camera", out Entity camera))
+        {
+            camTransform = camera.GetComponent<Camera>().CamTranslation;
+        }
+        
+        renderer.Begin(camTransform);
         foreach (SpriteDrawInfo info in Sprites)
             renderer.Draw(info.Texture, info.Position, info.Tint, 0, info.Scale, Vector2.Zero);
         renderer.End();
