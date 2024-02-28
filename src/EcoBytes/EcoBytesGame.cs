@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Numerics;
 using EcoBytes.Data;
 using u4.Core;
 using u4.Engine;
@@ -9,6 +10,8 @@ namespace EcoBytes;
 
 public class EcoBytesGame : Game
 {
+    public static Font Font;
+    
     public override void Initialize()
     {
         Logger.Debug("Loading upgrades.");
@@ -19,6 +22,9 @@ public class EcoBytesGame : Game
         
         Logger.Debug("Loading carbon factors.");
         CarbonFactors.LoadFactorsFromJson(File.ReadAllText("Content/Data/CarbonFactors.json"));
+        
+        Logger.Debug("Loading font.");
+        Font = new Font(Graphics.Device, "Content/Roboto-Regular.ttf");
         
         base.Initialize();
     }
@@ -31,6 +37,9 @@ public class EcoBytesGame : Game
         // Fortunately, for this project, we only need the sprite renderer, so we can just use it directly for the moment. 
         Graphics.SpriteRenderer.Begin();
         base.Draw();
+        
+        Font.Draw(Graphics.SpriteRenderer, 20, "Hello", new Vector2(20), Color.White);
+        
         Graphics.SpriteRenderer.End();
     }
 }
