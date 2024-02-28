@@ -12,7 +12,7 @@ public class GameScene : Scene
     /// <summary>
     /// The amount of time, in seconds, that a week takes to advance.
     /// </summary>
-    public const float WeekAdvanceTime = 1.0f;
+    public const float WeekAdvanceTime = 2.0f;
 
     private float _weekAdvanceCounter;
     
@@ -20,6 +20,11 @@ public class GameScene : Scene
     
     public override void Initialize()
     {
+        Entity test = new Entity("test");
+        test.AddComponent(new Sprite(new Texture("Content/Textures/dh.png")));
+        test.AddComponent(new BuildingComponent("DH"));
+        AddEntity(test);
+        
         base.Initialize();
 
         CurrentWeek = 0;
