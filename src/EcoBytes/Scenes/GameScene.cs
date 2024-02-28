@@ -26,6 +26,7 @@ public class GameScene : Scene
         Entity test = new Entity("test");
         test.AddComponent(new Sprite(EcoBytesGame.DorsetHouse));
         test.AddComponent(new BuildingComponent("DH"));
+        test.AddComponent(new TextElement(EcoBytesGame.Font, "Hello", 100, Color.White, Vector2.Zero));
         AddEntity(test);
         
         base.Initialize();
@@ -52,7 +53,6 @@ public class GameScene : Scene
     {
         base.Draw();
 
-        EcoBytesGame.Font.Draw(Graphics.SpriteRenderer, 20, $"Week {CurrentWeek}", new Vector2(10, 680), Color.White,
-            true);
+        EcoBytesGame.Font.Draw(20, $"Week {CurrentWeek}", new Vector2(10, 680), Color.White, true);
     }
 }

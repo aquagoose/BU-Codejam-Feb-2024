@@ -32,7 +32,7 @@ public class Font : IDisposable
         _cachedCharacters = new Dictionary<uint, Dictionary<char, Character>>();
     }
 
-    public void Draw(SpriteRenderer renderer, uint size, string text, Vector2 position, Color color, bool isStatic = false)
+    public void Draw(uint size, string text, Vector2 position, Color color, bool isStatic = false)
     {
         Vector2 currentPosition = position;
         
