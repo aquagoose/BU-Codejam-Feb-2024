@@ -1,3 +1,4 @@
+using System;
 using u4.Engine.Entities;
 using u4.Engine;
 using u4.Math;
@@ -13,11 +14,16 @@ namespace EcoBytes.UI;
 
 public class Button : Component
 {
-    public event OnButtonClick ButtonClick = delegate{};
+    public Action ButtonClick;
     public Rectangle rect;
     public Vector2 ButtonPos;
 
     public bool Visible;
+
+    public Button(Action click)
+    {
+        ButtonClick = click;
+    }
 
     public override void Initialize()
     {
@@ -43,9 +49,5 @@ public class Button : Component
         }
     }
 
-    public override void Draw()
-    {
-        
-    }
-    public delegate void OnButtonClick();
+    public override void Draw() { }
 }

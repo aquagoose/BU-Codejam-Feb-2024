@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Numerics;
 using EcoBytes.Data;
+using EcoBytes.Scenes;
 using u4.Core;
 using u4.Engine;
 using u4.Math;
@@ -10,9 +11,16 @@ namespace EcoBytes;
 
 public class EcoBytesGame : Game
 {
+    public static GameScene GameScene;
+    
     public static Font Font;
 
     public static Texture DorsetHouse;
+
+    public EcoBytesGame(GameScene scene)
+    {
+        GameScene = scene;
+    }
     
     public override void Initialize()
     {
