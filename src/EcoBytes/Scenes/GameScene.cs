@@ -19,7 +19,7 @@ public class GameScene : Scene
     /// <summary>
     /// The amount of time, in seconds, that a week takes to advance.
     /// </summary>
-    public const float WeekAdvanceTime = 2.0f;
+    public const float WeekAdvanceTime = 1f;
     
     private float _weekAdvanceCounter;
     public static uint CurrentWeek;
@@ -48,18 +48,26 @@ public class GameScene : Scene
         kimmeridgeHouse.AddComponent(new ClickableBuilding());
         AddEntity(kimmeridgeHouse);
 
+        Entity pooleGateway = new Entity("PooleGateway", new Transform(new Vector3(-800, 100, 0)));
+        pooleGateway.AddComponent(new Sprite(EcoBytesGame.PooleGatewayBuilding));
+        pooleGateway.AddComponent(new BuildingComponent("PGB"));
+        pooleGateway.AddComponent(new ClickableBuilding());
+        AddEntity(pooleGateway);
+
         const int padding = 10;
 
         Size<int> buttonSize = new Size<int>(30, 40);
 
+        const int camMoveDist = 200;
+        
         ImageButton leftArrow = new ImageButton("LeftArrow",
             new Point(1280 - (buttonSize.Width) * 2 - padding * 2, 720 - buttonSize.Height - padding), buttonSize,
-            EcoBytesGame.LeftArrowTexture, () => camera.MoveCamera(-100));
+            EcoBytesGame.LeftArrowTexture, () => camera.MoveCamera(-camMoveDist));
         UI.AddElement(leftArrow);
 
         ImageButton rightArrow = new ImageButton("RightArrow",
             new Point(1280 - buttonSize.Width - padding, 720 - buttonSize.Height - padding), buttonSize,
-            EcoBytesGame.RightArrowTexture, () => camera.MoveCamera(100));
+            EcoBytesGame.RightArrowTexture, () => camera.MoveCamera(camMoveDist));
         UI.AddElement(rightArrow);
 
         TextElement weekText =
@@ -69,8 +77,6 @@ public class GameScene : Scene
         _upgradePanel = new Panel("UpgradePanel", new Point(20, 20), new Size<int>(1240, 680), Color.White);
         _upgradePanel.AddElement(new ImageButton("CloseButton", new Point(20, 20), new Size<int>(30, 30),
             EcoBytesGame.CloseButtonTexture, () => UI.RemoveElement(_upgradePanel.Name)));
-
-        const string bName = "PGB";
         
         Point buttonPosition = new Point(50, 75);
         foreach ((string id, Upgrade upgrade) in Upgrade.LoadedUpgrades)

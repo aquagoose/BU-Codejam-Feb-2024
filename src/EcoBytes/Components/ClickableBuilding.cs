@@ -11,6 +11,8 @@ namespace EcoBytes.Components;
 
 public class ClickableBuilding : Component
 {
+    private bool _isMouseClicked;
+    
     public override void Update(float dt)
     {
         base.Update(dt);
@@ -32,9 +34,21 @@ public class ClickableBuilding : Component
             !UI.MouseCaptured)
         {
             sprite.Tint = new Color(1.5f, 1.5f, 1.5f);
-            
-            if (Input.MouseButtonPressed(MouseButton.Left))
+
+            if (Input.MouseButtonDown(MouseButton.Left))
+            {
+                sprite.Tint = new Color(0.5f, 0.5f, 0.5f);
+                _isMouseClicked = true;
+            }
+            else if (_isMouseClicked)
+            {
+                _isMouseClicked = false;
                 ((GameScene) SceneManager.CurrentScene).OpenUpgradePanel(Entity.GetComponent<BuildingComponent>());
+            }
+        }
+        else
+        {
+            _isMouseClicked = false;
         }
     }
 }

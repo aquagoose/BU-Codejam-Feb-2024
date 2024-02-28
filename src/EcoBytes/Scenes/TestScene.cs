@@ -29,5 +29,7 @@ public class TestScene : Scene
         
         UI.AddElement(button1);
         UI.AddElement(button2);
+
+        UI.AddElement(new Image("test", new Point(0, 0), new Size<int>(1280, 720), new Texture(@"C:\Users\ollie\Pictures\GOOSED.png")));
     }
 }
