@@ -1,4 +1,7 @@
-﻿using u4.Engine;
+﻿using System.IO;
+using EcoBytes.Data;
+using u4.Core;
+using u4.Engine;
 using u4.Math;
 using u4.Render;
 
@@ -6,6 +9,20 @@ namespace EcoBytes;
 
 public class EcoBytesGame : Game
 {
+    public override void Initialize()
+    {
+        Logger.Debug("Loading upgrades.");
+        Upgrade.LoadUpgradesFromJson(File.ReadAllText("Content/Data/Upgrades.json"));
+        
+        Logger.Debug("Loading buildings.");
+        Building.LoadBuildingsFromJson(File.ReadAllText("Content/Data/Buildings.json"));
+        
+        Logger.Debug("Loading carbon factors.");
+        CarbonFactors.LoadFactorsFromJson(File.ReadAllText("Content/Data/CarbonFactors.json"));
+        
+        base.Initialize();
+    }
+
     public override void Draw()
     {
         Graphics.Device.ClearColorBuffer(Color.Black);
