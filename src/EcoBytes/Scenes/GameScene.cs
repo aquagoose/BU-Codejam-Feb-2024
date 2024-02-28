@@ -47,6 +47,9 @@ public class GameScene : Scene
         
         if (Input.KeyPressed(Key.P))
             GetEntity("test").GetComponent<BuildingComponent>().PurchaseUpgrade("LEDFixture");
+        
+        if (Input.KeyPressed(Key.O))
+            GetEntity("test").GetComponent<BuildingComponent>().PurchaseUpgrade("Pump");
     }
 
     public override void Draw()

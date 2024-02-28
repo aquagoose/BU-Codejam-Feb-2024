@@ -23,6 +23,12 @@ public class BuildingComponent : Component
 
     public void PurchaseUpgrade(string upgradeId)
     {
+        foreach ((_, PurchasedUpgrade upgrade) in PurchasedUpgrades)
+        {
+            if (upgrade.Progress == UpgradeProgress.Building)
+                throw new MultipleUpgradeException();
+        }
+
         if (PurchasedUpgrades.ContainsKey(upgradeId))
             throw new UpgradePurchasedException(Upgrade.LoadedUpgrades[upgradeId].Name);
         
@@ -44,6 +50,8 @@ public class BuildingComponent : Component
 
             if (currentWeek - upgrade.StartingWeek >= upgradeInfo.BuildTime)
                 upgrade.Progress = UpgradeProgress.Completed;
+            
+            Console.WriteLine($"{uId} - {upgrade.Progress}");
         }
     }
 
