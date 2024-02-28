@@ -22,6 +22,16 @@ public static class UI
         _elements.Add(element.Name, element);
     }
 
+    public static void RemoveElement(string name)
+    {
+        _elements.Remove(name);
+    }
+
+    public static T GetElement<T>(string name) where T : UIElement
+    {
+        return (T) _elements[name];
+    }
+
     public static void ClearElements()
     {
         _elements.Clear();

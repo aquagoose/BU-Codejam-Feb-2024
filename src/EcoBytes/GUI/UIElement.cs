@@ -5,6 +5,7 @@ using Pie.Windowing;
 using u4.Engine;
 using u4.Math;
 using u4.Render.Renderers;
+using Color = u4.Math.Color;
 
 namespace EcoBytes.GUI;
 
@@ -16,6 +17,8 @@ public abstract class UIElement
     
     public Size<int> Size;
 
+    public bool Enabled;
+
     protected bool IsHovered;
     protected bool IsMouseClicked;
     protected bool IsClicked;
@@ -25,6 +28,7 @@ public abstract class UIElement
         Name = name;
         Position = position;
         Size = size;
+        Enabled = true;
     }
 
     public virtual void Update(ref bool mouseCaptured)
@@ -36,7 +40,7 @@ public abstract class UIElement
         
         if (mPos.X >= Position.X && mPos.X < Position.X + Size.Width &&
             mPos.Y >= Position.Y && mPos.Y < Position.Y + Size.Height &&
-            !mouseCaptured)
+            !mouseCaptured && Enabled)
         {
             mouseCaptured = true;
 
@@ -57,7 +61,11 @@ public abstract class UIElement
         }
     }
 
-    public abstract void Draw(SpriteRenderer renderer);
+    public virtual void Draw(SpriteRenderer renderer)
+    {
+        if (!Enabled)
+            renderer.DrawRectangle(new Vector2(Position.X, Position.Y), Size, new Color(1.0f, 1.0f, 1.0f, 0.5f));
+    }
 
     public delegate void OnClick(UIElement element);
 }

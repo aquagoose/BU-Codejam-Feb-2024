@@ -17,18 +17,15 @@ namespace EcoBytes;
 
 public class EcoBytesGame : Game
 {
-    public static GameScene GameScene;
-    
     public static Font Font;
 
     public static Texture WhiteTexture;
+
+    public static Texture LeftArrowTexture;
+    public static Texture RightArrowTexture;
+    public static Texture CloseButtonTexture;
     
     public static Texture DorsetHouse;
-
-    public EcoBytesGame(GameScene scene)
-    {
-        GameScene = scene;
-    }
     
     public override void Initialize()
     {
@@ -46,6 +43,9 @@ public class EcoBytesGame : Game
         
         Logger.Debug("Loading textures.");
         WhiteTexture = new Texture(new byte[]{ 255, 255, 255, 255 }, new Size<int>(1, 1));
+        LeftArrowTexture = new Texture("Content/Textures/LeftArrow.png");
+        RightArrowTexture = new Texture("Content/Textures/RightArrow.png");
+        CloseButtonTexture = new Texture("Content/Textures/CloseButton.png");
         DorsetHouse = new Texture("Content/Textures/dh.png");
         
         base.Initialize();

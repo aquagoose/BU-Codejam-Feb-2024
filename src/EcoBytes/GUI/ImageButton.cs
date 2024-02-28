@@ -41,5 +41,7 @@ public class ImageButton : UIElement
         Vector2 scale = new Vector2(Size.Width / (float) texSize.Width, Size.Height / (float) texSize.Height);
         
         renderer.Draw(Texture, new Vector2(Position.X, Position.Y), tint, 0, scale, Vector2.Zero);
+        
+        base.Draw(renderer);
     }
 }

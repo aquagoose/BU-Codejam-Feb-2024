@@ -93,6 +93,7 @@
         "BuildTime": 36,
         "ElecImpact": 15,
         "GasImpact": 0,
+        "ValidBuildings": ["DH"],
         "Description": "Buying this upgrade increases the electricity consumption by 15%. This change completely removed gas usage in Dorset House. All gas-saving projects will now be converted into electricity saving projects. Boiler upgrades are no longer available."
     },
     "HeatVentCoolControls": {
@@ -133,6 +134,7 @@
         "BuildTime": 0,
         "ElecImpact": 0,
         "GasImpact": -10,
+        "ValidBuildings": ["PGB"],
         "Description": "Selecting this task saves 10% of gas consumption for the next three months. This change replaces the 24/7 access to the Poole Gateway Building into being only open at 08:00 - 18:00. This will lead to student dissatifaction."
     },
     "ExtLighting": {
