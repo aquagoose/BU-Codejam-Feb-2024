@@ -19,7 +19,7 @@ public class GameScene : Scene
     /// <summary>
     /// The amount of time, in seconds, that a week takes to advance.
     /// </summary>
-    public const float WeekAdvanceTime = 1f;
+    public const float WeekAdvanceTime = 0.5f;
     
     private float _weekAdvanceCounter;
     public uint CurrentWeek;
@@ -121,6 +121,8 @@ public class GameScene : Scene
                 panel.Description = upgrade.Description;
                 panel.Cost = upgrade.Cost;
                 panel.Time = upgrade.BuildTime;
+                panel.ElectricImpact = upgrade.ElecImpact;
+                panel.GasImpact = upgrade.GasImpact;
             };
 
             upButton.UnHover = ResetDescription;
@@ -173,7 +175,7 @@ public class GameScene : Scene
         panel.Cost = -1;
         panel.Title = $"Upgrade {_currentBuilding.Name}.";
         panel.Description =
-            "Get any upgrade you want that's within your budget. Be wary though, some upgrades take far longer than others!\n\nHover over each upgrade to see a description here.\n\nUnavailable upgrades are greyed out. This may be because they're unavailable, completed, or you can't afford them.";
+            $"Get any upgrade you want that's within your budget. Be wary though, some upgrades take far longer than others!\n\nHover over each upgrade to see a description here.\n\nUnavailable upgrades are greyed out. This may be because they're unavailable, completed, or you can't afford them.\n\nElectric: {_currentBuilding.ElectricConsumption:0.00}kWh\nGas: {_currentBuilding.GasConsumption:0.00}kWh";
     }
 
     public override void Update(float dt)
@@ -212,7 +214,7 @@ public class GameScene : Scene
             }
         }
         
-        UI.GetElement<TextElement>("WeekText").Text = $"Year { (CurrentWeek / 52) + 1 } Week {(CurrentWeek % 52) + 1}";
+        UI.GetElement<TextElement>("WeekText").Text = $"{ (CurrentWeek / 52) + 2024 } Week {(CurrentWeek % 52) + 1}";
         UI.GetElement<TextElement>("Money").Text = RemainingBudget.ToString("C0");
         
         if (Input.KeyPressed(Key.P))

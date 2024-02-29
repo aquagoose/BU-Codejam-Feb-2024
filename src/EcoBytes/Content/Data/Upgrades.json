@@ -5,6 +5,7 @@
         "BuildTime": 1,
         "ElecImpact": 13000,
         "GasImpact": 0,
+        "ImpactAsKwh": true,
         "Description": "Buying this upgrade increases the electricity consumption by 13,000 kWh per year."
     },
     "LEDBulb": {

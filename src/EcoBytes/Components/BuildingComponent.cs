@@ -16,6 +16,58 @@ public class BuildingComponent : Component
 
     public string Name => Building.LoadedBuildings[Id].Name;
 
+    public double ElectricConsumption
+    {
+        get
+        {
+            double consumption = Building.LoadedBuildings[Id].Elec;
+
+            foreach ((string id, PurchasedUpgrade pUpgrade) in PurchasedUpgrades)
+            {
+                if (pUpgrade.Progress != UpgradeProgress.Completed)
+                    continue;
+                
+                Upgrade upgrade = Upgrade.LoadedUpgrades[id];
+
+                if (upgrade.ImpactAsKwh)
+                    consumption += upgrade.ElecImpact;
+                else
+                {
+                    double elecPercent = upgrade.ElecImpact / 100.0;
+                    consumption += consumption * elecPercent;
+                }
+            }
+
+            return consumption;
+        }
+    }
+
+    public double GasConsumption
+    {
+        get
+        {
+            double consumption = Building.LoadedBuildings[Id].Gas;
+
+            foreach ((string id, PurchasedUpgrade pUpgrade) in PurchasedUpgrades)
+            {
+                if (pUpgrade.Progress != UpgradeProgress.Completed)
+                    continue;
+                
+                Upgrade upgrade = Upgrade.LoadedUpgrades[id];
+
+                if (upgrade.ImpactAsKwh)
+                    consumption += upgrade.GasImpact;
+                else
+                {
+                    double gasPercent = upgrade.GasImpact / 100.0;
+                    consumption += consumption * gasPercent;
+                }
+            }
+
+            return consumption;
+        }
+    }
+
     public BuildingComponent(string id)
     {
         Id = id;

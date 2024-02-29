@@ -5,12 +5,12 @@ namespace EcoBytes.Data;
 public readonly struct CarbonFactors
 {
     /// <summary>
-    /// The cost of grid electricity, in £ per KW/H.
+    /// The cost of grid electricity, in £ per kWh.
     /// </summary>
     public readonly double ElecCost;
     
     /// <summary>
-    /// The cost of gas, in £ per KW/H
+    /// The cost of gas, in £ per kWh
     /// </summary>
     public readonly double GasCost;
     

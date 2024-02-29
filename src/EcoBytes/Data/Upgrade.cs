@@ -32,6 +32,11 @@ public readonly struct Upgrade
     public readonly double GasImpact;
 
     /// <summary>
+    /// If true, the impacts will be interpreted in kWh instead of percent. 
+    /// </summary>
+    public readonly bool ImpactAsKwh;
+
+    /// <summary>
     /// If not null, then this upgrade only works in certain buildings.
     /// </summary>
     public readonly HashSet<string> ValidBuildings;
@@ -41,13 +46,14 @@ public readonly struct Upgrade
     /// </summary>
     public readonly string Description;
 
-    public Upgrade(string name, int cost, int buildTime, double elecImpact, double gasImpact, HashSet<string> validBuildings, string description)
+    public Upgrade(string name, int cost, int buildTime, double elecImpact, double gasImpact, bool impactAsKwh, HashSet<string> validBuildings, string description)
     {
         Name = name;
         Cost = cost;
         BuildTime = buildTime;
         ElecImpact = elecImpact;
         GasImpact = gasImpact;
+        ImpactAsKwh = impactAsKwh;
         ValidBuildings = validBuildings;
         Description = description;
     }

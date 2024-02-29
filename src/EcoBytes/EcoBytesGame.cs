@@ -28,6 +28,11 @@ public class EcoBytesGame : Game
     public static Texture DorsetHouse;
     public static Texture KimmeridgeHouse;
     public static Texture PooleGatewayBuilding;
+
+    public static Texture MoneyIcon;
+    public static Texture TimeIcon;
+    public static Texture ElectricIcon;
+    public static Texture GasIcon;
     
     public override void Initialize()
     {
@@ -51,6 +56,10 @@ public class EcoBytesGame : Game
         DorsetHouse = new Texture("Content/Textures/dh.png");
         KimmeridgeHouse = new Texture("Content/Textures/kh.png");
         PooleGatewayBuilding = new Texture("Content/Textures/pgb.png");
+        MoneyIcon = new Texture("Content/Textures/money.png");
+        TimeIcon = new Texture("Content/Textures/clock.png");
+        ElectricIcon = new Texture("Content/Textures/plug.png");
+        GasIcon = new Texture("Content/Textures/fext.png");
         
         base.Initialize();
     }
