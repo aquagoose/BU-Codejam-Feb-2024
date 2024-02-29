@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Text;
 using Pie;
 using Pie.Text;
 using u4.Math;
@@ -39,9 +40,10 @@ public class Font : IDisposable
         GetCharSet(size, text, out Dictionary<char, Character> characters, out int largestChar);
 
         currentPosition.Y += largestChar;
-
-        foreach (char c in text)
+        
+        for (int i = 0; i < text.Length; i++)
         {
+            char c = text[i];
             Character character = characters[c];
             
             switch (c)
@@ -87,6 +89,25 @@ public class Font : IDisposable
         }
 
         return finalSize;
+    }
+
+    // !! HACK !!
+    public string FitToWidth(uint size, string text, int maxWidth)
+    {
+        string result = "";
+
+        // I seriously and sincerely completely and utterly hate this from the bottom of my heart
+        // Nothing can describe the sheer anger I suffer through while writing this DAMN SHIT FUCKING CODE THAT IS DOGSHIT
+        // BUT IT FUCKING WORKS SO WHO THE FUCK CARES
+        foreach (string word in text.Split(' '))
+        {
+            if (MeasureString(size, result + word + ' ').Width > maxWidth)
+                result += '\n';
+
+            result += word + ' ';
+        }
+
+        return result;
     }
 
     public void DisposeTextureCache()

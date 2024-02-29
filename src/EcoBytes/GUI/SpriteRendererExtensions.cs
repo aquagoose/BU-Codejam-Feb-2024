@@ -16,7 +16,7 @@ public static class SpriteRendererExtensions
     {
         renderer.DrawRectangle(position, new Size<int>(size.Width, borderWidth), color);
         renderer.DrawRectangle(position, new Size<int>(borderWidth, size.Height), color);
-        renderer.DrawRectangle(position + new Vector2(size.Width, 0), new Size<int>(borderWidth, size.Height), color);
+        renderer.DrawRectangle(position + new Vector2(size.Width - borderWidth, 0), new Size<int>(borderWidth, size.Height), color);
         renderer.DrawRectangle(position + new Vector2(0, size.Height), new Size<int>(size.Width, borderWidth), color);
     }
 

@@ -84,14 +84,23 @@ public class GameScene : Scene
         UI.AddElement(rightArrow);
 
         TextElement weekText =
-            new TextElement("WeekText", new Point(20, 690), EcoBytesGame.Font, 20, "????????????????");
+            new TextElement("WeekText", new Point(20, 680), EcoBytesGame.Font, 20, "????????????????");
         UI.AddElement(weekText);
 
-        _upgradePanel = new Panel("UpgradePanel", new Point(20, 20), new Size<int>(1240, 680), Color.White);
+        ProgressBar weekProgress =
+            new ProgressBar("WeekProgress", new Point(20, 705), new Size<int>(130, 10), Color.Black);
+        UI.AddElement(weekProgress);
+
+        _upgradePanel = new Panel("UpgradePanel", new Point(20, 20), new Size<int>(1240, 680), new Color(1f, 1f, 1f, 0.85f));
         _upgradePanel.AddElement(new ImageButton("CloseButton", new Point(20, 20), new Size<int>(30, 30),
             EcoBytesGame.CloseButtonTexture, () => UI.RemoveElement(_upgradePanel.Name)));
+
+        Upgrade test = Upgrade.LoadedUpgrades["HeatPump"];
         
-        Point buttonPosition = new Point(50, 75);
+        _upgradePanel.AddElement(new DescriptionPanel("DescriptionPanel", new Point(650, 75), new Size<int>(550, 300),
+            EcoBytesGame.Font, test.Name, test.Description));
+        
+        Point buttonPosition = new Point(75, 75);
         foreach ((string id, Upgrade upgrade) in Upgrade.LoadedUpgrades)
         {
             Button upButton = new Button($"{id}UpButton", buttonPosition, new Size<int>(500, 25), EcoBytesGame.Font, 20,
@@ -109,7 +118,7 @@ public class GameScene : Scene
         
         base.Initialize();
 
-        CurrentWeek = 1;
+        CurrentWeek = 0;
         Budget = 500000;
     }
 
@@ -151,6 +160,8 @@ public class GameScene : Scene
             CurrentWeek++;
         }
 
+        UI.GetElement<ProgressBar>("WeekProgress").Progress = _weekAdvanceCounter / WeekAdvanceTime;
+
         if (_currentBuilding != null)
         {
             if (_currentBuilding.IsUpgrading(out string upgradeId))
@@ -174,7 +185,7 @@ public class GameScene : Scene
             }
         }
         
-        UI.GetElement<TextElement>("WeekText").Text = $"Week {CurrentWeek}";
+        UI.GetElement<TextElement>("WeekText").Text = $"Year { (CurrentWeek / 52) + 1 } Week {(CurrentWeek % 52) + 1}";
         
         if (Input.KeyPressed(Key.P))
             EcoBytesGame.SetScene(new GameScene());
