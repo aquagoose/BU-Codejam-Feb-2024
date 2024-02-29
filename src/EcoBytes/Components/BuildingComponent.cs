@@ -31,6 +31,7 @@ public class BuildingComponent : Component
             throw new UpgradePurchasedException(Upgrade.LoadedUpgrades[upgradeId].Name);
         
         PurchasedUpgrades.Add(upgradeId, new PurchasedUpgrade(((GameScene) SceneManager.CurrentScene).CurrentWeek));
+        ((GameScene) SceneManager.CurrentScene).RemainingBudget -= Upgrade.LoadedUpgrades[upgradeId].Cost;
     }
     
     public bool IsUpgrading(out string upgradeId)

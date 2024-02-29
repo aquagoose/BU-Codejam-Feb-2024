@@ -24,7 +24,7 @@ public class GameScene : Scene
     private float _weekAdvanceCounter;
     public uint CurrentWeek;
 
-    public uint Budget;
+    public int RemainingBudget;
 
     private Panel _upgradePanel;
     private bool _hasRefreshedPanel;
@@ -91,25 +91,39 @@ public class GameScene : Scene
             new ProgressBar("WeekProgress", new Point(20, 705), new Size<int>(130, 10), Color.Black);
         UI.AddElement(weekProgress);
 
+        TextElement money =
+            new TextElement("Money", new Point(20, 650), EcoBytesGame.Font, 20, "£999999999999999999999");
+        UI.AddElement(money);
+
         _upgradePanel = new Panel("UpgradePanel", new Point(20, 20), new Size<int>(1240, 680), new Color(1f, 1f, 1f, 0.85f));
         _upgradePanel.AddElement(new ImageButton("CloseButton", new Point(20, 20), new Size<int>(30, 30),
             EcoBytesGame.CloseButtonTexture, () => UI.RemoveElement(_upgradePanel.Name)));
-
-        Upgrade test = Upgrade.LoadedUpgrades["HeatPump"];
         
         _upgradePanel.AddElement(new DescriptionPanel("DescriptionPanel", new Point(650, 75), new Size<int>(550, 300),
-            EcoBytesGame.Font, test.Name, test.Description));
+            EcoBytesGame.Font, "?????", "???????", 123456, 999999));
         
         Point buttonPosition = new Point(75, 75);
         foreach ((string id, Upgrade upgrade) in Upgrade.LoadedUpgrades)
         {
-            Button upButton = new Button($"{id}UpButton", buttonPosition, new Size<int>(500, 25), EcoBytesGame.Font, 20,
+            Button upButton = new Button(id, buttonPosition, new Size<int>(500, 25), EcoBytesGame.Font, 20,
                 upgrade.Name, () =>
                 {
                     _currentBuilding.PurchaseUpgrade(id);
                     RefreshUpgradePanel();
                     _hasRefreshedPanel = false;
                 });
+
+            upButton.Hover = () =>
+            {
+                DescriptionPanel panel = _upgradePanel.GetElement<DescriptionPanel>("DescriptionPanel");
+                Upgrade upgrade = Upgrade.LoadedUpgrades[upButton.Name];
+                panel.Title = upgrade.Name;
+                panel.Description = upgrade.Description;
+                panel.Cost = upgrade.Cost;
+                panel.Time = upgrade.BuildTime;
+            };
+
+            upButton.UnHover = ResetDescription;
             
             _upgradePanel.AddElement(upButton);
 
@@ -119,7 +133,7 @@ public class GameScene : Scene
         base.Initialize();
 
         CurrentWeek = 0;
-        Budget = 500000;
+        RemainingBudget = 500000;
     }
 
     public void OpenUpgradePanel(BuildingComponent building)
@@ -131,12 +145,16 @@ public class GameScene : Scene
 
     public void RefreshUpgradePanel()
     {
+        ResetDescription();
+
+        bool isUpgrading = _currentBuilding.IsUpgrading(out _);
+        
         foreach ((string id, Upgrade upgrade) in Upgrade.LoadedUpgrades)
         {
-            Button button = _upgradePanel.GetElement<Button>($"{id}UpButton");
+            Button button = _upgradePanel.GetElement<Button>(id);
             button.Progress = 0;
 
-            if (_currentBuilding.IsUpgrading(out _))
+            if (isUpgrading || upgrade.Cost > RemainingBudget)
             {
                 button.Enabled = false;
                 continue;
@@ -147,6 +165,15 @@ public class GameScene : Scene
             if (!upgrade.ValidBuildings?.Contains(_currentBuilding.Id) ?? false)
                 button.Enabled = false;
         }
+    }
+
+    public void ResetDescription()
+    {
+        DescriptionPanel panel = _upgradePanel.GetElement<DescriptionPanel>("DescriptionPanel");
+        panel.Cost = -1;
+        panel.Title = $"Upgrade {_currentBuilding.Name}.";
+        panel.Description =
+            "Get any upgrade you want that's within your budget. Be wary though, some upgrades take far longer than others!\n\nHover over each upgrade to see a description here.\n\nUnavailable upgrades are greyed out. This may be because they're unavailable, completed, or you can't afford them.";
     }
 
     public override void Update(float dt)
@@ -172,7 +199,7 @@ public class GameScene : Scene
                 float currentProgress = (CurrentWeek - pUpgrade.StartingWeek) / (float) upgrade.BuildTime;
                 float nextProgress = ((CurrentWeek + 1) - pUpgrade.StartingWeek) / (float) upgrade.BuildTime;
 
-                _upgradePanel.GetElement<Button>($"{upgradeId}UpButton").Progress = float.Lerp(currentProgress,
+                _upgradePanel.GetElement<Button>($"{upgradeId}").Progress = float.Lerp(currentProgress,
                     nextProgress, _weekAdvanceCounter / WeekAdvanceTime);
             }
             else
@@ -186,6 +213,7 @@ public class GameScene : Scene
         }
         
         UI.GetElement<TextElement>("WeekText").Text = $"Year { (CurrentWeek / 52) + 1 } Week {(CurrentWeek % 52) + 1}";
+        UI.GetElement<TextElement>("Money").Text = RemainingBudget.ToString("C0");
         
         if (Input.KeyPressed(Key.P))
             EcoBytesGame.SetScene(new GameScene());

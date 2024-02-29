@@ -9,6 +9,8 @@ namespace EcoBytes.GUI;
 
 public class Button : UIElement
 {
+    private bool _hasSentHoverEvent;
+    
     public Font Font;
 
     public uint TextSize;
@@ -16,6 +18,10 @@ public class Button : UIElement
     public string Text;
 
     public Action Click;
+
+    public Action Hover;
+
+    public Action UnHover;
 
     public Color Color;
 
@@ -34,6 +40,7 @@ public class Button : UIElement
         TextSize = textSize;
         Text = text;
         Click = click;
+        Hover = null;
         
         Color = Color.LightSeaGreen;
         HoverColor = Color.MediumSeaGreen;
@@ -46,7 +53,21 @@ public class Button : UIElement
     public override void Update(ref bool mouseCaptured)
     {
         base.Update(ref mouseCaptured);
-        
+
+        if (IsHovered)
+        {
+            if (!_hasSentHoverEvent)
+            {
+                _hasSentHoverEvent = true;
+                Hover?.Invoke();
+            }
+        }
+        else if (_hasSentHoverEvent)
+        {
+            _hasSentHoverEvent = false;
+            UnHover.Invoke();
+        }
+
         if (IsClicked)
             Click.Invoke();
     }

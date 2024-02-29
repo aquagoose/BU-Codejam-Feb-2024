@@ -40,6 +40,9 @@ public class Camera : Component
         
         Transform.Position.X = float.Lerp(_startX, _targetX, easeValue);
 
+        // Clamp camera position on screen.
+        Transform.Position.X = float.Clamp(Transform.Position.X, -900, 880);
+
         _moveCounter += dt;
     }
 }
